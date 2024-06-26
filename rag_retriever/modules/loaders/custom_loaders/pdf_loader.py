@@ -5,7 +5,7 @@ import cv2
 import fitz
 import numpy as np
 import tqdm
-from langchain.document_loaders.unstructured import UnstructuredFileLoader
+from langchain_community.document_loaders import UnstructuredFileLoader
 from PIL import Image
 
 from rag_retriever.modules.loaders.custom_loaders.ocr import get_ocr

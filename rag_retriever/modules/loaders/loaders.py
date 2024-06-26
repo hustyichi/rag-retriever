@@ -96,7 +96,7 @@ def get_loader(loader_name: str, file_path: str, loader_kwargs: Optional[dict] =
             "CustomHTMLLoader",
         ]:
             document_loaders_module = importlib.import_module(
-                "chatchat.server.file_rag.document_loaders"
+                "rag_retriever.modules.loaders.custom_loaders"
             )
         else:
             document_loaders_module = importlib.import_module(

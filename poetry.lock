@@ -2110,6 +2110,21 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 reference = "mirrors"
 
 [[package]]
+name = "jieba"
+version = "0.42.1"
+description = "Chinese Words Segmentation Utilities"
+optional = false
+python-versions = "*"
+files = [
+    {file = "jieba-0.42.1.tar.gz", hash = "sha256:055ca12f62674fafed09427f176506079bc135638a14e23e25be909131928db2"},
+]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "mirrors"
+
+[[package]]
 name = "jinja2"
 version = "3.1.4"
 description = "A very fast and expressive template engine."
@@ -8199,4 +8214,4 @@ reference = "mirrors"
 [metadata]
 lock-version = "2.0"
 python-versions = ">3.10,<3.13"
-content-hash = "ad934242ef7e172b8e877a334ac1b5e522fef47429bffe60d77f7fbe93eca552"
+content-hash = "4e5cdb19c422000df9489985703c87991f48543e56de6c35b47e75d8aa0a614b"

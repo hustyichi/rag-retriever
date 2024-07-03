@@ -24,6 +24,7 @@ openai = "^1.35.9"
 langchain-openai = "^0.1.14"
 chromadb = "^0.5.3"
 jieba = "^0.42.1"
+elasticsearch = "^8.14.0"
 
 
 [[tool.poetry.source]]

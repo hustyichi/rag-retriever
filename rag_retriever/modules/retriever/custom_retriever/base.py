@@ -11,6 +11,7 @@ class BaseRetrieverService(metaclass=ABCMeta):
     def do_init(self, **kwargs):
         pass
 
+    @staticmethod
     @abstractmethod
     def from_vectorstore(
         vectorstore: VectorStore,

@@ -1,6 +1,6 @@
 import json
 import shutil
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import sqlalchemy
 from langchain.schema import Document
@@ -17,7 +17,7 @@ from rag_retriever.modules.doc_store.kb_service.base import KBService, Supported
 from rag_retriever.modules.retriever.retriever import get_Retriever
 
 # TODO: 支持 kbs_config
-kbs_config = {}
+kbs_config: dict[str, Any] = {}
 
 
 class PGKBService(KBService):

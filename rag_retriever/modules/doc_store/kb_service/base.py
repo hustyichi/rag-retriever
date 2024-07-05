@@ -376,86 +376,6 @@ class KBService(ABC):
         pass
 
 
-class KBServiceFactory:
-    @staticmethod
-    def get_service(
-        kb_name: str,
-        vector_store_type: Union[str, SupportedVSType],
-        embed_model: str,
-        kb_info: str,
-    ) -> KBService:
-        if isinstance(vector_store_type, str):
-            vector_store_type = getattr(SupportedVSType, vector_store_type.upper())
-        params = {
-            "knowledge_base_name": kb_name,
-            "embed_model": embed_model,
-            "kb_info": kb_info,
-        }
-        if SupportedVSType.FAISS == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.faiss_kb_service import (
-                FaissKBService,
-            )
-
-            return FaissKBService(**params)
-        elif SupportedVSType.PG == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.pg_kb_service import (
-                PGKBService,
-            )
-
-            return PGKBService(**params)
-        elif SupportedVSType.RELYT == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.relyt_kb_service import (
-                RelytKBService,
-            )
-
-            return RelytKBService(**params)
-        elif SupportedVSType.MILVUS == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.milvus_kb_service import (
-                MilvusKBService,
-            )
-
-            return MilvusKBService(**params)
-        elif SupportedVSType.ZILLIZ == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.zilliz_kb_service import (
-                ZillizKBService,
-            )
-
-            return ZillizKBService(**params)
-        elif SupportedVSType.DEFAULT == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.milvus_kb_service import (
-                MilvusKBService,
-            )
-
-            return MilvusKBService(
-                **params
-            )  # other milvus parameters are set in model_config.kbs_config
-        elif SupportedVSType.ES == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.es_kb_service import (
-                ESKBService,
-            )
-
-            return ESKBService(**params)
-        elif SupportedVSType.CHROMADB == vector_store_type:
-            from rag_retriever.modules.doc_store.kb_service.chromadb_kb_service import (
-                ChromaKBService,
-            )
-
-            return ChromaKBService(**params)
-
-    @staticmethod
-    def get_service_by_name(kb_name: str) -> KBService:
-        # TODO: fix kb service
-        return None
-        # _, vs_type, embed_model = load_kb_from_db(kb_name)
-        # if _ is None:  # kb not in db, just return None
-        #     return None
-        # return KBServiceFactory.get_service(kb_name, vs_type, embed_model)
-
-    @staticmethod
-    def get_default():
-        return KBServiceFactory.get_service("default", SupportedVSType.DEFAULT)
-
-
 def get_kb_details() -> List[Dict]:
     kbs_in_folder = list_kbs_from_folder()
     kbs_in_db: List[KnowledgeBaseSchema] = KBService.list_kbs()
@@ -482,49 +402,6 @@ def get_kb_details() -> List[Dict]:
         else:
             kb_detail["in_folder"] = False
             result[kb_name] = kb_detail
-
-    data = []
-    for i, v in enumerate(result.values()):
-        v["No"] = i + 1
-        data.append(v)
-
-    return data
-
-
-def get_kb_file_details(kb_name: str) -> List[Dict]:
-    kb = KBServiceFactory.get_service_by_name(kb_name)
-    if kb is None:
-        return []
-
-    files_in_folder = list_files_from_folder(kb_name)
-    files_in_db = kb.list_files()
-    result = {}
-
-    for doc in files_in_folder:
-        result[doc] = {
-            "kb_name": kb_name,
-            "file_name": doc,
-            "file_ext": os.path.splitext(doc)[-1],
-            "file_version": 0,
-            "document_loader": "",
-            "docs_count": 0,
-            "text_splitter": "",
-            "create_time": None,
-            "in_folder": True,
-            "in_db": False,
-        }
-    lower_names = {x.lower(): x for x in result}
-    for doc in files_in_db:
-        # TODO: fix doc detail
-        # doc_detail = get_file_detail(kb_name, doc)
-        doc_detail = None
-        if doc_detail:
-            doc_detail["in_db"] = True
-            if doc.lower() in lower_names:
-                result[lower_names[doc.lower()]].update(doc_detail)
-            else:
-                doc_detail["in_folder"] = False
-                result[doc] = doc_detail
 
     data = []
     for i, v in enumerate(result.values()):

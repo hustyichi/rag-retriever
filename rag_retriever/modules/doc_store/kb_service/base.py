@@ -441,14 +441,6 @@ class KBServiceFactory:
             )
 
             return ChromaKBService(**params)
-        elif (
-            SupportedVSType.DEFAULT == vector_store_type
-        ):  # kb_exists of default kbservice is False, to make validation easier.
-            from rag_retriever.modules.doc_store.kb_service.default_kb_service import (
-                DefaultKBService,
-            )
-
-            return DefaultKBService(kb_name)
 
     @staticmethod
     def get_service_by_name(kb_name: str) -> KBService:

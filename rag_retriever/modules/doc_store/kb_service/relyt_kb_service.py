@@ -11,9 +11,9 @@ from rag_retriever.modules.doc_store.embedding.utils import (
 )
 from rag_retriever.modules.doc_store.kb_service.base import (
     KBService,
-    SupportedVSType,
     score_threshold_process,
 )
+from rag_retriever.modules.doc_store.kb_service.constants import SupportedVSType
 
 # TODO: support kbs_config
 kbs_config = {}

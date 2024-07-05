@@ -14,11 +14,8 @@ from rag_retriever.modules.doc_store.embedding.utils import (
     KnowledgeFile,
     get_Embeddings,
 )
-from rag_retriever.modules.doc_store.kb_service.base import (
-    KBService,
-    SupportedVSType,
-    get_kb_path,
-)
+from rag_retriever.modules.doc_store.kb_service.base import KBService, get_kb_path
+from rag_retriever.modules.doc_store.kb_service.constants import SupportedVSType
 from rag_retriever.modules.retriever.retriever import get_Retriever
 
 # TODO: fix kbs_config

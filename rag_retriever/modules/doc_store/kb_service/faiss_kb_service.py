@@ -13,7 +13,8 @@ from rag_retriever.modules.doc_store.kb_cache.faiss_cache import (
     ThreadSafeFaiss,
     kb_faiss_pool,
 )
-from rag_retriever.modules.doc_store.kb_service.base import KBService, SupportedVSType
+from rag_retriever.modules.doc_store.kb_service.base import KBService
+from rag_retriever.modules.doc_store.kb_service.constants import SupportedVSType
 from rag_retriever.modules.retriever.retriever import get_Retriever
 
 

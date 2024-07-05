@@ -11,7 +11,8 @@ from rag_retriever.modules.doc_store.embedding.utils import (
     get_kb_path,
     get_vs_path,
 )
-from rag_retriever.modules.doc_store.kb_service.base import KBService, SupportedVSType
+from rag_retriever.modules.doc_store.kb_service.base import KBService
+from rag_retriever.modules.doc_store.kb_service.constants import SupportedVSType
 from rag_retriever.modules.retriever.retriever import get_Retriever
 
 SCORE_THRESHOLD = 0.9

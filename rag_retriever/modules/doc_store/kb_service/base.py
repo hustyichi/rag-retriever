@@ -17,6 +17,7 @@ from rag_retriever.modules.doc_store.embedding.utils import (
     list_files_from_folder,
     list_kbs_from_folder,
 )
+from rag_retriever.modules.doc_store.kb_service.constants import SupportedVSType
 
 # TODO: 修复 kbs_configs
 kbs_config: dict[str, Any] = {}
@@ -54,17 +55,6 @@ class KnowledgeBaseSchema(BaseModel):
 
     class Config:
         from_attributes = True  # 确保可以从 ORM 实例进行验证
-
-
-class SupportedVSType:
-    FAISS = "faiss"
-    MILVUS = "milvus"
-    DEFAULT = "default"
-    ZILLIZ = "zilliz"
-    PG = "pg"
-    RELYT = "relyt"
-    ES = "es"
-    CHROMADB = "chromadb"
 
 
 class KBService(ABC):
